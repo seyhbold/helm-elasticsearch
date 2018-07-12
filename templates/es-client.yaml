@@ -38,6 +38,10 @@ spec:
                   component: {{ template "fullname" . }}
                   role: client
       {{- end }}
+      {{- with .Values.client.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+      {{- end }}
       initContainers:
       - name: init-sysctl
         image: "{{ .Values.image.init.repository }}:{{ .Values.image.init.tag }}"
